@@ -1,0 +1,127 @@
+/* Palette. Looked-up colors are defined on .root so every window (main, popup, settings) shares them.
+   The accent changes with the mode via .root.focus / .short-break / .long-break. */
+.root {
+    -surface: #272343;
+    -surface-hi: #34305a;
+    -text: #f3eeff;
+    -muted: #a79fc9;
+    -accent: #ff8fa3;
+    -on-accent: #2a1530;
+    -fx-font-family: "Segoe UI Variable Text", "Segoe UI", "System";
+    -fx-font-size: 14px;
+}
+.root.short-break { -accent: #7fe0c3; -on-accent: #0f2f29; }
+.root.long-break  { -accent: #8fb8ff; -on-accent: #0f2140; }
+
+.app-root {
+    -fx-background-color: linear-gradient(to bottom, #231f40, #16132a);
+}
+.app-root .label { -fx-text-fill: -text; }
+
+.mode-pill {
+    -fx-background-color: derive(-accent, -72%);
+    -fx-background-radius: 20;
+    -fx-padding: 6 18 7 18;
+    -fx-text-fill: -accent !important;
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+}
+.time-label {
+    -fx-font-size: 68px;
+    -fx-font-weight: bold;
+}
+.hint-label,
+.app-root .field-label {
+    -fx-text-fill: -muted !important;
+    -fx-font-size: 12px;
+}
+.app-root .field-label { -fx-font-size: 14px; }
+
+.dot { -fx-fill: -surface-hi; }
+.dot-on { -fx-fill: -accent; }
+
+/* Buttons */
+.primary-button, .secondary-button {
+    -fx-background-radius: 22;
+    -fx-padding: 11 28 11 28;
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+    -fx-cursor: hand;
+}
+.primary-button { -fx-background-color: -accent; -fx-text-fill: -on-accent; }
+.primary-button:hover { -fx-background-color: derive(-accent, 14%); }
+.primary-button:pressed { -fx-scale-x: 0.97; -fx-scale-y: 0.97; }
+.primary-button:disabled { -fx-opacity: 0.5; }
+.secondary-button { -fx-background-color: -surface-hi; -fx-text-fill: -text; }
+.secondary-button:hover { -fx-background-color: derive(-surface-hi, 12%); }
+.secondary-button:pressed { -fx-scale-x: 0.97; -fx-scale-y: 0.97; }
+.primary-button:focused, .secondary-button:focused, .icon-button:focused {
+    -fx-background-insets: 0;
+}
+
+.icon-button {
+    -fx-background-color: transparent;
+    -fx-background-radius: 16;
+    -fx-text-fill: -muted;
+    -fx-font-size: 20px;
+    -fx-padding: 2 9 4 9;
+    -fx-cursor: hand;
+}
+.icon-button:hover { -fx-background-color: -surface; -fx-text-fill: -text; }
+
+/* Settings dialog */
+.dialog-title { -fx-font-size: 20px; -fx-font-weight: bold; }
+.check-box { -fx-text-fill: -text; }
+.check-box .box {
+    -fx-background-color: -surface-hi;
+    -fx-background-radius: 6;
+    -fx-background-insets: 0;
+    -fx-border-color: transparent;
+    -fx-padding: 4;
+}
+.check-box:selected .box { -fx-background-color: -accent; }
+.check-box .mark { -fx-background-color: transparent; }
+.check-box:selected .mark { -fx-background-color: -on-accent; }
+
+.spinner {
+    -fx-background-color: transparent;
+    -fx-background-insets: 0;
+    -fx-background-radius: 10;
+    -fx-border-color: transparent;
+}
+.spinner:focused { -fx-background-color: transparent; -fx-background-insets: 0; }
+.spinner .text-field, .spinner .text-field:focused {
+    -fx-background-color: -surface;
+    -fx-background-insets: 0;
+    -fx-border-color: transparent;
+    -fx-background-radius: 10 0 0 10;
+    -fx-text-fill: -text;
+    -fx-highlight-fill: -accent;
+    -fx-highlight-text-fill: -on-accent;
+}
+.spinner .increment-arrow-button, .spinner .decrement-arrow-button {
+    -fx-background-color: -surface-hi;
+    -fx-background-insets: 0;
+    -fx-background-radius: 0;
+}
+.spinner .increment-arrow-button { -fx-background-radius: 0 10 0 0; }
+.spinner .decrement-arrow-button { -fx-background-radius: 0 0 10 0; }
+.spinner .increment-arrow-button:hover, .spinner .decrement-arrow-button:hover {
+    -fx-background-color: derive(-surface-hi, 15%);
+}
+.spinner .increment-arrow, .spinner .decrement-arrow { -fx-background-color: -text; }
+
+/* Character popup */
+.popup-root { -fx-background-color: transparent; }
+.popup-card {
+    -fx-background-color: linear-gradient(to bottom, #2e2a52, #1d1a38);
+    -fx-background-radius: 32;
+    -fx-border-color: derive(-accent, -35%);
+    -fx-border-radius: 32;
+    -fx-border-width: 1.5;
+    -fx-padding: 26 34 28 34;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.6), 32, 0.15, 0, 10);
+}
+.popup-title { -fx-text-fill: -text; -fx-font-size: 22px; -fx-font-weight: bold; -fx-padding: 6 0 0 0; }
+.popup-time  { -fx-text-fill: -accent; -fx-font-size: 46px; -fx-font-weight: bold; }
+.popup-kind  { -fx-text-fill: -muted; -fx-font-size: 13px; }
