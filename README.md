@@ -1,8 +1,14 @@
-# MochiTimer Pomodoro
+# MochiTimer Pomodoro for Windows
 
 A small, lightweight Pomodoro timer for Windows built with **Java 21+, JavaFX 21, and Maven**.
 
-A cute pomodoro provides customizable focus and break timers with an optional cute character popup and automatic monitor shutdown during breaks.
+MochiTimer provides customizable focus and break timers with an optional cute character popup and automatic monitor shutdown during breaks.
+
+## Download
+
+**[Download MochiTimer for Windows](https://www.dropbox.com/scl/fi/v24znl50jq3c1yi9m949y/MochiTimer.zip?rlkey=8fy5na947bsu9h77uv1ms19tx&st=anc849e7&dl=0)**
+
+Download the ZIP, extract it, and run `MochiTimer.exe`.
 
 ## Features
 
@@ -35,9 +41,7 @@ All durations can be changed from **Settings**.
 - **Maven**
 - **Windows API** for monitor power control
 
-## Run
-
-Run the application with Maven:
+## Run from Source
 
 ```bash
 mvn clean javafx:run
@@ -45,56 +49,32 @@ mvn clean javafx:run
 
 ## Build
 
-Create the Maven package:
-
 ```bash
 mvn clean package
 ```
 
 ## Package for Windows
 
-The application is packaged as a standalone Windows application using `jpackage`.
-
-The build process uses a custom application icon and includes the required Java modules and native-access options.
-
-Example PowerShell build script:
+Make sure `JAVA_HOME` points to your JDK installation and Maven is available on your `PATH`.
 
 ```powershell
-$env:JAVA_HOME = "C:\Users\CARL JIMROE PANO\.jdks\openjdk-27"
-
-$ico = "C:\Users\CARL JIMROE PANO\Documents\cute-pomodoro\src\main\packaging\app-icon.ico"
-
-$mvn = Get-ChildItem "C:\Program Files\JetBrains","$env:LOCALAPPDATA\Programs","$env:LOCALAPPDATA\JetBrains","$env:USERPROFILE\.m2" `
-    -Recurse -Filter mvn.cmd -ErrorAction SilentlyContinue |
-    Select-Object -First 1 -ExpandProperty FullName
-
-"Using Maven: $mvn"
-
-& $mvn clean package
-
-if (Test-Path target\dist) {
-    Remove-Item -Recurse -Force target\dist
-}
-
-& "$env:JAVA_HOME\bin\jpackage.exe" `
-    --type app-image `
-    --name CutePomodoro `
-    --input target\libs `
-    --main-jar cute-pomodoro-1.0.0.jar `
-    --main-class com.pomodoro.Main `
-    --dest target\dist `
-    --icon $ico `
-    --add-modules java.desktop,java.logging,java.prefs,java.xml,jdk.unsupported `
-    --java-options "--enable-native-access=ALL-UNNAMED" `
-    --java-options "--sun-misc-unsafe-memory-access=allow"
-
-dir target\dist\CutePomodoro\CutePomodoro.exe
+jpackage `
+  --type app-image `
+  --name MochiTimer `
+  --input target\libs `
+  --main-jar cute-pomodoro-1.0.0.jar `
+  --main-class com.pomodoro.Main `
+  --dest target\dist `
+  --icon src\main\packaging\app-icon.ico `
+  --add-modules java.desktop,java.logging,java.prefs,java.xml,jdk.unsupported `
+  --java-options "--enable-native-access=ALL-UNNAMED" `
+  --java-options "--sun-misc-unsafe-memory-access=allow"
 ```
 
-The resulting executable is:
+The resulting application will be located at:
 
 ```text
-target\dist\CutePomodoro\CutePomodoro.exe
+target\dist\MochiTimer\MochiTimer.exe
 ```
 
 ## Character
@@ -129,8 +109,6 @@ Settings are stored locally at:
 ```text
 %USERPROFILE%\.cute-pomodoro\settings.properties
 ```
-
-No account or external service is required.
 
 ## Project Structure
 
